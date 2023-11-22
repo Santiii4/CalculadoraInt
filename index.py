@@ -12,8 +12,8 @@ from tkinter import *
 def Derivar():
     try:
         x = symbols('x')
-        fun_escrita = funcion.get()
-        f = parse_expr(fun_escrita)
+        funcion_escrita = funcion.get()
+        f = parse_expr(funcion_escrita)
         derivada = diff(f, x)
         etiqueta.configure(text=derivada)
     except:
@@ -22,8 +22,8 @@ def Derivar():
 def Integrales_Indefinidas():
     try:
         x = symbols('x')
-        fun_escrita2 = funcion.get()
-        g = parse_expr(fun_escrita2)
+        funcion_escrita2 = funcion.get()
+        g = parse_expr(funcion_escrita2)
         integral = integrate(g, x)
         etiqueta.configure(text=integral)
     except:
@@ -32,11 +32,11 @@ def Integrales_Indefinidas():
 def Integrales_Definidas():
     try:
         x = symbols('x')
-        fun_escrita3 = funcion.get()
-        g = parse_expr(fun_escrita3)
-        limite_inf = float(input("Ingrese el límite inferior: "))
-        limite_sup = float(input("Ingrese el límite superior: "))
-        integral_definida = integrate(g, (x, limite_inf, limite_sup))
+        funcion_escrita3 = funcion.get()
+        g = parse_expr(funcion_escrita3)
+        limite_inferior = float(input("Límite inferior: "))
+        limite_superior = float(input("Límite superior: "))
+        integral_definida = integrate(g, (x, limite_inferior, limite_superior))
         etiqueta.configure(text=integral_definida)
     except:
         etiqueta.configure(text="Introduce la función correctamente")
@@ -48,7 +48,7 @@ def Integrales_Definidas():
 
 
 ventana = Tk()
-ventana.geometry('400x350')
+ventana.geometry('300x250')
 ventana.title("Cálculo Diferencial e Integral: f(x)")
 
 anuncio = Label(ventana, text="Introduce una función de x:", font=("Arial", 15), fg="blue")
