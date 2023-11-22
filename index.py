@@ -1,10 +1,16 @@
 from sympy import *
-from sympy.parsing.sympy_parser import parse_expr # Leer función introducida
+from sympy.parsing.sympy_parser import parse_expr
 from tkinter import *
 
-def derivada():
+
+
+# PARTE MATEMATICA
+
+
+
+def Derivar():
     try:
-        x = symbols('x') #Declarar variable independiente
+        x = symbols('x')
         fun_escrita = funcion.get()
         f = parse_expr(fun_escrita)
         derivada = diff(f,x)
@@ -13,16 +19,23 @@ def derivada():
         etiqueta.configure(text="Introduce la función correctamente")
         
         
-def integral():
+def Integrar():
     try:
-        x = symbols('x') #Declarar variable independiente
+        x = symbols('x')
         fun_escrita2 = funcion.get()
         g = parse_expr(fun_escrita2)
         integral = integrate(g,x)
         etiqueta.configure(text=integral)
     except:
         etiqueta.configure(text="Introduce la función correctamente")
-    
+
+
+
+
+# PARTE GRAFICA
+
+
+
 ventana = Tk()
 ventana.geometry('400x280')
 ventana.title("Cálculo Diferencial e Integral: f(x)")
@@ -36,18 +49,10 @@ funcion.pack()
 etiqueta = Label(ventana, text="Resultado", font=("Arial", 15), fg="red")
 etiqueta.pack()
 
-boton1 = Button(ventana, text="Derivar Función", font=("Arial", 15), command=derivada)
+boton1 = Button(ventana, text="Derivar Función", font=("Arial", 15), command=Derivar)
 boton1.pack()
 
-boton2 = Button(ventana, text="Integrar Función", font=("Arial", 15), command=integral)
+boton2 = Button(ventana, text="Integrar Función", font=("Arial", 15), command=Integrar)
 boton2.pack()
-
-def _quit(): #Función salir
-    ventana.quit()     # detiene mainloop
-    ventana.destroy()  # elimina la ventana de la memoria
-                    
-
-button3 = Button(master=ventana, text="Salir", font=("Arial", 15), command=_quit)
-button3.pack()
 
 ventana.mainloop()
