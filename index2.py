@@ -4,11 +4,18 @@ from tkinter import *
 import matplotlib.pyplot as plt
 import numpy as np
 
+# PARTE MATEMÁTICA
+def actualizar_grafico():
+    try:
+        x = symbols('x')
+        funcion_escrita = funcion.get()
+        f = parse_expr(funcion_escrita)
+        etiqueta.configure(text="")
 
+        plot_grafico(f)
 
-
-# PARTE MATEMATICA
-
+    except:
+        etiqueta.configure(text="Introduce la función correctamente")
 
 
 def Derivar():
@@ -19,8 +26,8 @@ def Derivar():
         derivada = diff(f, x)
         etiqueta.configure(text=derivada)
 
-        plot_grafico(f, derivada)
-    
+        plot_grafico(f)
+
     except:
         etiqueta.configure(text="Introduce la función correctamente")
 
@@ -56,7 +63,8 @@ def plot_grafico(f, limite_inf=None, limite_sup=None):
     x_vals = np.linspace(-10, 10, 400)
     y_vals = [f.evalf(subs={'x': x_val}) for x_val in x_vals]
 
-    plt.figure()
+    plt.clf()  # Limpiar la figura antes de agregar un nuevo gráfico
+
     plt.plot(x_vals, y_vals, label='f(x)')
 
     if limite_inf is not None and limite_sup is not None:
@@ -68,14 +76,10 @@ def plot_grafico(f, limite_inf=None, limite_sup=None):
     plt.ylabel('f(x)')
     plt.legend()
     plt.grid(True)
-    plt.show()
+    plt.draw()  # Dibujar el nuevo gráfico
+    plt.pause(0.001)  # Pequeña pausa para permitir la actualización
 
-
-
-# PARTE GRAFICA
-
-
-
+# PARTE GRÁFICA
 ventana = Tk()
 ventana.geometry('400x350')
 ventana.title("Cálculo Diferencial e Integral: f(x)")
@@ -89,16 +93,16 @@ funcion.pack()
 etiqueta = Label(ventana, text="Resultado", font=("Arial", 15), fg="red")
 etiqueta.pack()
 
-boton1 = Button(ventana, text="Derivar Función", font=("Arial", 15), command=Derivar)
+boton1 = Button(ventana, text="Actualizar Gráfico", font=("Arial", 15), command=actualizar_grafico)
 boton1.pack()
 
-boton2 = Button(ventana, text="Integrar Función (Indefinida)", font=("Arial", 15), command=Integrales_Indefinidas)
+boton2 = Button(ventana, text="Derivar Función", font=("Arial", 15), command=Derivar)
 boton2.pack()
 
-boton3 = Button(ventana, text="Integrar Función (Definida)", font=("Arial", 15), command=Integrales_Definidas)
+boton3 = Button(ventana, text="Integrar Función (Indefinida)", font=("Arial", 15), command=Integrales_Indefinidas)
 boton3.pack()
 
-ventana.mainloop()
+boton4 = Button(ventana, text="Integrar Función (Definida)", font=("Arial", 15), command=Integrales_Definidas)
+boton4.pack()
 
-# 3*x**2+4*x**2
-# raiz cuadrada = sqrt()
+ventana.mainloop()
